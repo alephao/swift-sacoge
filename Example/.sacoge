@@ -1,0 +1,12 @@
+{
+  "from" : "/static/immutable/",
+  "ignore" : [
+    "ignore_this_folder"
+  ],
+  "skipChecksum" : [
+    "no_checksum.txt",
+    "no_checksum_in_this_dir"
+  ],
+  "structName" : "Asset",
+  "to" : "./my_public_folder/"
+}

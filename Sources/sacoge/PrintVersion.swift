@@ -1,0 +1,3 @@
+func printVersionInformation() {
+  print("main")
+}
