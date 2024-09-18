@@ -36,9 +36,9 @@ struct AssetDirectory {
     url: URL,
     skipChecksum _skipChecksum: Bool
   ) throws {
-    let subpaths = try FileManager.default.contentsOfDirectory(
-      atPath: url.path
-    ).filter({ !configuration.ignore.contains($0) })
+    let subpaths = try FileManager.default.contentsOfDirectory(atPath: url.path)
+      .filter({ !configuration.ignore.contains($0) })
+      .sorted()
 
     var children: [AssetFileOrDirectory] = []
 
