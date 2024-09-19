@@ -33,17 +33,33 @@ struct AssetFile {
     guard let externalURL = URL(string: externalPath) else {
       throw SacogeError(message: "externalURL failed")
     }
-    let data = try Data(contentsOf: URL(filePath: url.path, directoryHint: .notDirectory))
+
+    #if swift(>=6)
+    let fileURL = URL(filePath: url.path, directoryHint: .notDirectory)
+    #else
+    let fileURL = URL(fileURLWithPath: url.path)
+    #endif
+
+    let data = try Data(contentsOf: fileURL)
     let sum = bytes4(data)
 
     let externalFileName =
       externalURL.deletingPathExtension().lastPathComponent + "_" + sum + "."
       + externalURL.pathExtension
+
+    #if swift(>=6)
     let externalPathWithChecksum =
       externalURL
       .deletingLastPathComponent()
       .appending(path: externalFileName)
       .path
+    #else
+    let externalPathWithChecksum =
+      externalURL
+      .deletingLastPathComponent()
+      .appendingPathComponent(externalFileName)
+      .path
+    #endif
 
     self.url = url
     self.internalPath = internalPath

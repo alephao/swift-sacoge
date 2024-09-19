@@ -43,7 +43,11 @@ struct AssetDirectory {
     var children: [AssetFileOrDirectory] = []
 
     for subpath in subpaths {
+      #if swift(>=6)
       let subpathURL = url.appending(path: subpath)
+      #else
+      let subpathURL = url.appendingPathComponent(subpath)
+      #endif
       var isDir: ObjCBool = false
       _ = FileManager.default.fileExists(
         atPath: subpathURL.path,
