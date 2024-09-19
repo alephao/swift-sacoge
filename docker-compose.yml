@@ -1,0 +1,31 @@
+version: '3.7'
+
+name: linux-tests
+services:
+  swift508:
+    build:
+      context: .
+      dockerfile: swift508.Dockerfile
+    working_dir: /app
+    entrypoint: swift test
+
+  swift509:
+    build:
+      context: .
+      dockerfile: swift509.Dockerfile
+    working_dir: /app
+    entrypoint: swift test
+
+  swift510:
+    build:
+      context: .
+      dockerfile: swift510.Dockerfile
+    working_dir: /app
+    entrypoint: swift test
+
+  swift600:
+    build:
+      context: .
+      dockerfile: swift600.Dockerfile
+    working_dir: /app
+    entrypoint: swift test
