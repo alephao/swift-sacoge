@@ -23,6 +23,9 @@ let package = Package(
       dependencies: [
         "SacogeCore",
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency")
       ]
     ),
     .plugin(
@@ -47,6 +50,9 @@ let package = Package(
         "SacogeCore",
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
         .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency")
       ]
     ),
   ]
