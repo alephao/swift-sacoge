@@ -14,7 +14,7 @@ struct SacogePlugin: BuildToolPlugin {
     // Get `sacoge` executable
     let sacoge = try context.tool(named: "sacoge")
 
-    var inputFiles: [Path] = []
+    let inputFiles: [Path] = []
     var outputFiles: [Path] = []
 
     // TODO: Find inputFiles
