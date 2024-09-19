@@ -8,6 +8,12 @@ final class GeneratorStaticReferencesTests: GeneratorTestCase {
     assertInlineSnapshot(of: generated, as: .lines) {
       """
       extension MyAsset {
+        public enum _1_number {
+          public static let _2_number_txt = Asset(
+            internalPath: "1_number/2_number.txt",
+            externalPath: "/static/immutable/1_number/2_number_e3b0c442.txt"
+          )
+        }
         public enum deep {
           public enum deep2 {
             public enum deep3 {

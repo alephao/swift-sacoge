@@ -35,9 +35,9 @@ struct AssetFile {
     }
 
     #if swift(>=6)
-    let fileURL = URL(filePath: url.path, directoryHint: .notDirectory)
+      let fileURL = URL(filePath: url.path, directoryHint: .notDirectory)
     #else
-    let fileURL = URL(fileURLWithPath: url.path)
+      let fileURL = URL(fileURLWithPath: url.path)
     #endif
 
     let data = try Data(contentsOf: fileURL)
@@ -48,17 +48,17 @@ struct AssetFile {
       + externalURL.pathExtension
 
     #if swift(>=6)
-    let externalPathWithChecksum =
-      externalURL
-      .deletingLastPathComponent()
-      .appending(path: externalFileName)
-      .path
+      let externalPathWithChecksum =
+        externalURL
+        .deletingLastPathComponent()
+        .appending(path: externalFileName)
+        .path
     #else
-    let externalPathWithChecksum =
-      externalURL
-      .deletingLastPathComponent()
-      .appendingPathComponent(externalFileName)
-      .path
+      let externalPathWithChecksum =
+        externalURL
+        .deletingLastPathComponent()
+        .appendingPathComponent(externalFileName)
+        .path
     #endif
 
     self.url = url
@@ -78,7 +78,9 @@ extension AssetFile {
   }
 
   var staticReferenceVarName: String {
-    url.lastPathComponent.replacingSymbolsWithUnderscores()
+    url.lastPathComponent
+      .replacingSymbolsWithUnderscores()
+      .escapingFirstDigitIfNumber()
   }
 
   func dictEntry(parentPath: String) -> String {

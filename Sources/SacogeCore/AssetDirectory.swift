@@ -44,9 +44,9 @@ struct AssetDirectory {
 
     for subpath in subpaths {
       #if swift(>=6)
-      let subpathURL = url.appending(path: subpath)
+        let subpathURL = url.appending(path: subpath)
       #else
-      let subpathURL = url.appendingPathComponent(subpath)
+        let subpathURL = url.appendingPathComponent(subpath)
       #endif
       var isDir: ObjCBool = false
       _ = FileManager.default.fileExists(
@@ -96,7 +96,9 @@ extension AssetDirectory {
   }
 
   private var declarationName: String {
-    url.lastPathComponent.replacingSymbolsWithUnderscores()
+    url.lastPathComponent
+      .replacingSymbolsWithUnderscores()
+      .escapingFirstDigitIfNumber()
   }
 
   private func declaration(for child: AssetFileOrDirectory) -> String {

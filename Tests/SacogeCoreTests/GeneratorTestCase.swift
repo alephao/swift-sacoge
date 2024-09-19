@@ -34,6 +34,7 @@ class GeneratorTestCase: XCTestCase {
     try touch("my_public_files/with-dash.txt")
     try touch("my_public_files/with_underscore.txt")
     try touch("my_public_files/with_at@3x.txt")
+    try touch("my_public_files/1_number/2_number.txt")
 
     // Ignore
     try touch("my_public_files/ignore_this.txt")

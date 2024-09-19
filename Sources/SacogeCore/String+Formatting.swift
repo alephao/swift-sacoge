@@ -6,6 +6,12 @@ extension String {
       .replacingOccurrences(of: ".", with: "_")
   }
 
+  func escapingFirstDigitIfNumber() -> String {
+    (first?.isNumber ?? false)
+      ? "_\(self)"
+      : self
+  }
+
   func indent(_ n: Int) -> String {
     return String(repeating: " ", count: n) + self
   }

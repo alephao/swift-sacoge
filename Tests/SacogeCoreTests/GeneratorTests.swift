@@ -20,6 +20,12 @@ final class GeneratorTests: GeneratorTestCase {
       }
 
       extension MyAsset {
+        public enum _1_number {
+          public static let _2_number_txt = Asset(
+            internalPath: "1_number/2_number.txt",
+            externalPath: "/static/immutable/1_number/2_number_e3b0c442.txt"
+          )
+        }
         public enum deep {
           public enum deep2 {
             public enum deep3 {
@@ -76,6 +82,7 @@ final class GeneratorTests: GeneratorTestCase {
 
       extension MyAsset {
         public static let externalToInternalMapping: [String: String] = [
+          MyAsset._1_number._2_number_txt.externalPath: MyAsset._1_number._2_number_txt.internalPath,
           MyAsset.deep.deep2.deep3.level3_nochecksum_txt.externalPath: MyAsset.deep.deep2.deep3.level3_nochecksum_txt.internalPath,
           MyAsset.deep.deep2.deep3.level3_txt.externalPath: MyAsset.deep.deep2.deep3.level3_txt.internalPath,
           MyAsset.deep.deep2.level2_nochecksum_txt.externalPath: MyAsset.deep.deep2.level2_nochecksum_txt.internalPath,
