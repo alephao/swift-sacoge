@@ -24,8 +24,9 @@ public func buildApplication(_ arguments: some AppArguments) async throws
   let logger = {
     var logger = Logger(label: "Sacoge Example")
     logger.logLevel =
-      arguments.logLevel ?? environment.get("LOG_LEVEL").map { Logger.Level(rawValue: $0) ?? .info }
-      ?? .info
+    arguments.logLevel
+    ?? environment.get("LOG_LEVEL").flatMap { Logger.Level(rawValue: $0) }
+    ?? .info
     return logger
   }()
   let router = buildRouter()
