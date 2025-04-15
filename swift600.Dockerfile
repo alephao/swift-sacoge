@@ -1,11 +1,11 @@
-FROM swift:6.0
+FROM swift:5.10
 
 WORKDIR /app
 
-COPY Package.* ./
+COPY Package.swift ./
+COPY Package.resolved ./
 
-RUN swift package resolve --skip-update \
-        $([ -f ./Package.resolved ] && echo "--force-resolved-versions" || true)
+RUN swift package resolve --skip-update --force-resolved-versions
 
 COPY ./Plugins ./Plugins
 COPY ./Sources ./Sources
