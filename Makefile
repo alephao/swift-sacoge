@@ -1,6 +1,10 @@
 fmt:
 	swift-format format -i -r -p Sources Package.swift
 
+build-and-install:
+	swift build -c release
+	sudo cp .build/release/sacoge /usr/local/bin/
+
 test:
 	swift test
 
