@@ -4,9 +4,6 @@ fmt:
 test:
 	swift test
 
-test-linux-swift508:
-	docker compose run --rm --build swift508
-
 test-linux-swift509:
 	docker compose run --rm --build swift509
 
@@ -21,7 +18,6 @@ test-linux-all:
 
 .PHONY: fmt \
 	test \
-	test-linux-swift508 \
 	test-linux-swift509 \
 	test-linux-swift510 \
 	test-linux-swift600 \
