@@ -6,3 +6,10 @@ services:
       dockerfile: swift600.Dockerfile
     working_dir: /app
     entrypoint: swift test
+
+  swift601:
+    build:
+      context: .
+      dockerfile: swift601.Dockerfile
+    working_dir: /app
+    entrypoint: swift test

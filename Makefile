@@ -11,10 +11,14 @@ test:
 test-linux-swift600:
 	docker compose run --rm --build swift600
 
+test-linux-swift601:
+	docker compose run --rm --build swift601
+
 test-linux-all:
 	docker compose run --rm --build
 
 .PHONY: fmt \
 	test \
 	test-linux-swift600 \
+	test-linux-swift601 \
 	test-linux-all
