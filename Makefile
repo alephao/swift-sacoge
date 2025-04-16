@@ -1,5 +1,5 @@
 fmt:
-	swift-format format -i -r -p Sources Package.swift
+	swift-format format -i -r -p Sources Package.swift Plugins
 
 build-and-install:
 	swift build -c release
