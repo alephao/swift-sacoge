@@ -2,9 +2,7 @@
 [![CI](https://github.com/alephao/swift-sacoge/actions/workflows/ci.yml/badge.svg)](https://github.com/alephao/swift-sacoge/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/alephao/swift-sacoge/graph/badge.svg?token=ozz8CKz1Rb)](https://codecov.io/gh/alephao/swift-sacoge)
 
-> ⚠️  Work in progress
-
-Sacoge is a swift package plugin that makes it easy to serve your Swift Server's assets with an immutable cache policy by generating static references to each asset and adding the asset content's hash to its file name.
+Sacoge is a tool that makes it easy to serve your Swift Server's assets with an immutable cache policy by generating static references for each asset and adding the asset content's hash to its file name.
 
 By serving assets with an immutable cache policy you can considerably reduce the number of requests to your server.
 
@@ -18,7 +16,7 @@ If you're using [`hummingbird`](https://github.com/hummingbird-project/hummingbi
 ```swift
 dependencies: [
   // ...
-  .package(url: "https://github.com/alephao/swift-sacoge.git", from: "0.1.0"),
+  .package(url: "https://github.com/alephao/swift-sacoge.git", from: "0.3.0"),
 ]
 ```
 
