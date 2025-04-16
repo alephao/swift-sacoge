@@ -1,7 +1,6 @@
 import Foundation
-import SacogeCore
 
-func loadConfiguration(path: String?) throws -> Configuration {
+public func loadConfiguration(path: String?) throws -> Configuration {
   let configPath = path ?? ".sacoge"
   guard
     FileManager.default.fileExists(atPath: configPath)

@@ -1,5 +1,5 @@
-import PackagePlugin
 import Foundation
+import PackagePlugin
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -14,24 +14,41 @@ struct SacogePlugin: BuildToolPlugin {
     // Get `sacoge` executable
     let sacoge = try context.tool(named: "sacoge")
 
-    let inputFiles: [Path] = []
-    var outputFiles: [Path] = []
+    var inputFiles: [URL] = []
+    var outputFiles: [URL] = []
 
-    // TODO: Find inputFiles
-    // Get input config file
-    // if let configPath = context.package.directory.appending(".sacoge") {
-    //  inputFiles.append(configPath)
-    // }
-    // TODO: Add all files used to generate to the input/
+    // Check if configuration is available
+    let configURL = context.package.directoryURL.appending(path: ".sacoge")
+    let configExists = FileManager.default.fileExists(atPath: configURL.path())
+    if configExists {
+      inputFiles.append(configURL)
+    }
+
+    // Load configuration
+    let config = try loadConfiguration(path: configURL.path())
+
+    // Append input files
+    let filesToIgnore = Set(config.ignore)
+    let inputFilesToAdd = (FileManager.default.subpaths(atPath: config.to) ?? [])
+      .filter({
+        guard let first = $0.split(separator: "/").first else { return true }
+        return !filesToIgnore.contains(String(first))
+      })
+      .map({
+        context.package.directoryURL
+          .appending(path: config.to.trimmingPrefix("./"))
+          .appending(path: $0)
+      })
+    inputFiles.append(contentsOf: inputFilesToAdd)
 
     // Get the output directory
-    let outputDir = context.pluginWorkDirectory.appending(["SacogeGenerated"])
-    let outputFilePath = outputDir.appending(["Sacoge.gen.swift"])
+    let outputDir = context.pluginWorkDirectoryURL.appending(path: "SacogeGenerated")
+    let outputFilePath = outputDir.appending(path: "Sacoge.gen.swift")
     outputFiles.append(outputFilePath)
 
     // Create the directory where the file will be generated
     try FileManager.default.createDirectory(
-      atPath: outputDir.string,
+      at: outputDir,
       withIntermediateDirectories: true
     )
 
@@ -39,16 +56,13 @@ struct SacogePlugin: BuildToolPlugin {
     let args: [String] = [
       "generate",
       "--output",
-      outputFilePath.string,
+      outputFilePath.path(),
     ]
 
     return [
       .buildCommand(
-        displayName: """
-        [SacogePlugin]
-        sacoge \(args.joined(separator: " "))
-        """,
-        executable: sacoge.path,
+        displayName: "SacogePlugin",
+        executable: sacoge.url,
         arguments: args,
         inputFiles: inputFiles,
         outputFiles: outputFiles
